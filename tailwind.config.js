@@ -9,6 +9,8 @@ module.exports = {
         ],
         options: {
             safelist: [
+                'flex',
+                'relative',
                 'from-yellow-200',
                 'to-yellow-500',
                 'text-pink-900',
@@ -17,7 +19,6 @@ module.exports = {
                 'to-blue-800',
                 'text-pink-100',
                 'border-blue-300',
-                'dark',
                 'from-gray-700',
                 'to-gray-900',
                 'from-gray-300',
@@ -26,6 +27,7 @@ module.exports = {
                 'text-black',
                 'text-gray-700',
                 'text-gray-600',
+                'text-gray-500',
                 'text-gray-900',
                 'bg-gray-300',
                 'text-gray-300',
@@ -33,13 +35,19 @@ module.exports = {
                 'bg-white',
                 'focus:text-white',
                 'focus:bg-gray-900',
+                'focus-within:text-gray-400',
                 'focus:text-gray-900',
                 'focus:bg-white',
+                'w-full',
+                'w-1/2',
             ],
         }
     },
     darkMode: 'class', // 'media' / 'class' / 'false'
     theme: {
+        fontFamily: {
+            'sans': ['Lato', 'Helvetica', 'Calibri', 'Arial', 'sans-serif'],
+        },
         colors: {
             transparent: 'transparent',
             current: 'currentColor',
