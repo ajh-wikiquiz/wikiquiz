@@ -19,5 +19,8 @@
 .btn-blue:hover {
   @apply bg-blue-700;
 }
+.btn-blue:active {
+  @apply bg-blue-500;
+}
 
 @tailwind utilities;

@@ -1,6 +1,6 @@
 <script>
   import Title from "../components/Title.svelte";
-  import { dark } from "../store";  // dark mode
+  import { dark, articleImgSrc } from "../store";  // dark mode
 
   export let title;
 </script>
@@ -20,7 +20,7 @@
       Please wait...
       </div>
       <div>
-        <img src="" alt="<use team img scraper here>" />
+        <img id="articleImg" src="{ $articleImgSrc }" alt="<use team img scraper here>" />
       </div>
     </div>
 

@@ -1,13 +1,25 @@
 <script>
-  import { dark } from "../store";
+  import { dark, urlBarValue, articleImgSrc } from "../store";
   import { createEventDispatcher } from "svelte";
 
   export let isHalfWidth;
 
   const dispatch = createEventDispatcher();
 
-  const handleSubmit = () => {
-    dispatch("urlSubmission", document.getElementById("url").value);
+  const handleSubmit = async () => {
+    // Update url bar value.
+    let currentUrlValue = document.getElementById("url").value;
+    dispatch("urlSubmission", currentUrlValue);
+    let tmp = $urlBarValue;  // temporarily store here
+    $urlBarValue = '';
+
+    // Update loading screen image.
+    $articleImgSrc = '';
+    let response = await fetch(`https://wiki-service-361.herokuapp.com/image/?url=${tmp}`, {
+      method: 'GET',
+    });
+    let responseJson = await response.json();
+    $articleImgSrc = responseJson['IMAGE_URL'];
   };
 
   let formClass = "flex relative text-gray-600 focus-within:text-gray-400";
@@ -47,6 +59,7 @@
 
     <input type="url" name="url" id="url"
       pattern="[^#]+" title="# is not allowed"
+      value="{ $urlBarValue }"
       class="flex flex-grow py-2 text-sm rounded-md pl-10 focus:outline-none" placeholder="Enter URL..." required
       class:text-gray-900={$dark} class:bg-white={$dark}
       class:focus:text-white={$dark} class:focus:bg-gray-900={$dark}

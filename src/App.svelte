@@ -15,16 +15,14 @@
   const handleUrlSubmission = async (event) => {
     urlStatus = 1;  // fetching data
 
-    let response = await fetch('https://ajh-wikiscraper.herokuapp.com', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json;charset=utf-8',},
-      body: JSON.stringify({'url': event.detail,})
+    let response = await fetch(`https://ajh-wikiscraper.herokuapp.com?url=${event.detail}`, {
+      method: 'GET',
     });
     responseJson = await response.json();
 
-    setTimeout(() => {
+    setTimeout(() => {  // fake load
       urlStatus = 2;  // data received
-    }, 1000);
+    }, 2000);
   };
 </script>
 
@@ -73,7 +71,9 @@
       </div>
 
       <!-- Content -->
-      <QuizScreen data={responseJson['data']['contents']} />
+      <div class="p-8">
+        <QuizScreen data={responseJson['data']['contents']} />
+      </div>
 
     {/if}
 
