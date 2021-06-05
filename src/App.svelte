@@ -6,7 +6,8 @@
   import AppearanceToggler from "./components/AppearanceToggler.svelte";
   import UrlSearchBar from "./components/UrlSearchBar.svelte";
   import GetRandomArticleButton from "./components/GetRandomArticleButton.svelte";
-  import { dark, urlBarValue } from "./store";  // dark mode
+  import QuestionCounter from "./components/QuestionCounter.svelte";
+  import { dark, numQuestionsToGenerate, urlBarValue } from "./store";
 	import { fly } from 'svelte/transition';
 
   export let title;
@@ -66,7 +67,7 @@
       }))
       .json())['data']['contents']  // Only use what's necessary from the response.
       .filter(section => section.content.length > charCutoff)  // Ignore sections with little to no content.
-      // .slice(0, sectionsCutoff);  // Only return content for the first few sections.
+      .filter(section => !section.content.includes('mw-parser'));  // Ignore sections with junk until scraper is fixed.
   }
 
   /// Returns new sentences with the important phrases in the sentences
@@ -259,7 +260,7 @@
     );
 
     loadingText[0] = 'Generating quiz...';
-    await generateQuizData(event.detail);
+    await generateQuizData(event.detail, $numQuestionsToGenerate);
 
     if (quizData.length == 0) {
       resetPage();
@@ -277,7 +278,7 @@
 
 <!-- Note: "class:dark" is equivalent (and short for) "class:dark={dark}" or "class:dark={dark === true}" -->
 <main
-  class="bg-gradient-to-br text-center flex flex-col min-h-screen"
+  class="bg-gradient-to-br text-center flex flex-col min-h-screen min-w-full"
   class:dark
   class:from-gray-700={$dark}
   class:to-gray-900={$dark}
@@ -288,10 +289,10 @@
   {#if status === 0}
 
     <!-- Top -->
-    <!-- <div class="flex flex-row items-center justify-end p-3 space-x-8">
-      <AppearanceToggler />
-    </div> -->
-    <div class="flex flex-row items-center justify-end p-3 pt-6 space-x-8"></div>
+    <div class="flex flex-row items-center justify-end p-3 pt-6 space-x-8">
+      <!-- <AppearanceToggler /> -->
+      <QuestionCounter />
+    </div>
 
     <!-- Content -->
     <StartScreen title={title} on:urlSubmission={handleUrlSubmission} />
@@ -299,10 +300,9 @@
   {:else if status === 1}
 
     <!-- Top -->
-    <!-- <div class="flex flex-row items-center justify-end p-3 space-x-8">
-      <AppearanceToggler />
-    </div> -->
-    <div class="flex flex-row items-center justify-end p-3 pt-6 space-x-8"></div>
+    <div class="flex flex-row items-center justify-end p-3 pt-6 space-x-8">
+      <QuestionCounter />
+    </div>
 
     <!-- Content -->
     <LoadingScreen title={title} loadingText={loadingText} articleImgSrc={articleImgSrc} />
@@ -310,9 +310,10 @@
   {:else if status === 2}
 
     <!-- Top -->
-    <div class="flex flex-row items-center justify-between p-3 space-x-8">
+    <div class="flex flex-row items-center justify-between p-3 pt-6 space-x-8">
       <UrlSearchBar isHalfWidth={false} on:urlSubmission={handleUrlSubmission} />
       <GetRandomArticleButton />
+      <QuestionCounter />
       <!-- <AppearanceToggler /> -->
     </div>
 
@@ -325,9 +326,10 @@
 
   <div transition:fly="{{ y: 200, duration: transitionTime }}">
     <!-- Top -->
-    <div class="flex flex-row items-center justify-between p-3 space-x-8">
+    <div class="flex flex-row items-center justify-between p-3 pt-6 space-x-8">
       <UrlSearchBar isHalfWidth={false} on:urlSubmission={handleUrlSubmission} />
       <GetRandomArticleButton />
+      <QuestionCounter />
       <!-- <AppearanceToggler /> -->
     </div>
 

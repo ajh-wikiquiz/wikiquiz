@@ -53,4 +53,14 @@
   @apply bg-red-700 text-gray-300;
 }
 
+.btn-q-counter {
+  @apply cursor-pointer inline-block bg-white rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2;
+}
+.btn-q-counter:hover {
+  @apply bg-gray-300 text-black;
+}
+.btn-q-counter:active {
+  @apply bg-white text-gray-800;
+}
+
 @tailwind utilities;

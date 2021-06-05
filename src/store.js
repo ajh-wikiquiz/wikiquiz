@@ -9,4 +9,7 @@ const urlBarValue = writable('');
 const randomUrls = writable();
 const randomUrlsIndex = writable(0);
 
-export { dark, urlBarValue, randomUrls, randomUrlsIndex };
+// Options
+const numQuestionsToGenerate = writable(2);
+
+export { dark, urlBarValue, randomUrls, randomUrlsIndex, numQuestionsToGenerate };

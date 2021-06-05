@@ -21,7 +21,7 @@
         Please wait...
       </div>
       <div class="px-8 pb-8">
-        <img id="articleImg" class="max-w-full" src="{ articleImgSrc }" alt="" />  <!-- maybe get a custom alt text depending on the image -->
+        <img id="articleImg" class="max-w-full" src="{ articleImgSrc }" alt="" />  <!-- TODO: custom alt text dependent on image -->
       </div>
     </div>
 

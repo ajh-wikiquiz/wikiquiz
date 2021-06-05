@@ -2,7 +2,7 @@
   import Title from "../components/Title.svelte";
   import UrlSearchBar from "../components/UrlSearchBar.svelte";
   import GetRandomArticleButton from "../components/GetRandomArticleButton.svelte";
-  import { dark } from "../store";  // dark mode
+  import { dark, numQuestionsToGenerate } from "../store";
 
   export let title;
 </script>
@@ -12,7 +12,7 @@
   <div class="flex flex-col flex-grow space-y-8" class:text-white={$dark} class:text-black={!$dark}>
 
     <Title title={title} />
-    <UrlSearchBar isHalfWidth on:urlSubmission /><!-- pass urlSubmission event to parent -->
+    <UrlSearchBar isHalfWidth on:urlSubmission />
     <GetRandomArticleButton />
 
   </div>
