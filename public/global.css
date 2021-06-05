@@ -23,4 +23,34 @@
   @apply bg-blue-500;
 }
 
+.choice {
+  @apply cursor-pointer inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2;
+}
+.choice:hover {
+  @apply bg-gray-500 text-gray-900;
+}
+.choice:active {
+  @apply bg-gray-200 text-gray-700;
+}
+
+.choice-correct {
+  @apply cursor-pointer inline-block bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-gray-300 mr-2 mb-2;
+}
+.choice-correct:hover {
+  @apply bg-green-700 text-gray-200;
+}
+.choice-correct:active {
+  @apply bg-green-600 text-gray-300;
+}
+
+.choice-incorrect {
+  @apply cursor-pointer inline-block bg-red-700 rounded-full px-3 py-1 text-sm font-semibold text-gray-300 mr-2 mb-2;
+}
+.choice-incorrect:hover {
+  @apply bg-red-800 text-gray-200;
+}
+.choice-incorrect:active {
+  @apply bg-red-700 text-gray-300;
+}
+
 @tailwind utilities;

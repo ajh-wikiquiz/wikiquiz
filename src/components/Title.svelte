@@ -4,9 +4,6 @@
   export let title;
 </script>
 
-<style>
-</style>
-
 <span>
   <span class="has-tooltip">
     <sup>

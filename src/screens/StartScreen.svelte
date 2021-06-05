@@ -7,9 +7,6 @@
   export let title;
 </script>
 
-<style>
-</style>
-
 <div class="flex items-center justify-center">
 
   <div class="flex flex-col flex-grow space-y-8" class:text-white={$dark} class:text-black={!$dark}>

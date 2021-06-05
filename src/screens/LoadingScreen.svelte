@@ -1,12 +1,11 @@
 <script>
   import Title from "../components/Title.svelte";
-  import { dark, articleImgSrc } from "../store";  // dark mode
+  import { dark } from "../store";
 
   export let title;
+  export let loadingText;
+  export let articleImgSrc;
 </script>
-
-<style>
-</style>
 
 <div class="flex items-center justify-center">
 
@@ -16,11 +15,13 @@
 
     <div class="flex flex-col flex-grow items-center justify-center mt-5 space-y-5">
       <div>
-      Generating flashcards... <br />
-      Please wait...
+        {#each loadingText as text}
+          {text} <br />
+        {/each}
+        Please wait...
       </div>
-      <div>
-        <img id="articleImg" src="{ $articleImgSrc }" alt="<use team img scraper here>" />
+      <div class="px-8 pb-8">
+        <img id="articleImg" class="max-w-full" src="{ articleImgSrc }" alt="" />  <!-- maybe get a custom alt text depending on the image -->
       </div>
     </div>
 

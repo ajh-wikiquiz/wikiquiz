@@ -1,5 +1,5 @@
 <script>
-  import { dark, urlBarValue, articleImgSrc } from "../store";
+  import { dark, urlBarValue } from "../store";
   import { createEventDispatcher } from "svelte";
 
   export let isHalfWidth;
@@ -10,16 +10,6 @@
     // Update url bar value.
     let currentUrlValue = document.getElementById("url").value;
     dispatch("urlSubmission", currentUrlValue);
-    let tmp = $urlBarValue;  // temporarily store here
-    $urlBarValue = '';
-
-    // Update loading screen image.
-    $articleImgSrc = '';
-    let response = await fetch(`https://wiki-service-361.herokuapp.com/image/?url=${tmp}`, {
-      method: 'GET',
-    });
-    let responseJson = await response.json();
-    $articleImgSrc = responseJson['IMAGE_URL'];
   };
 
   let formClass = "flex relative text-gray-600 focus-within:text-gray-400";
@@ -30,9 +20,6 @@
     formClass += " w-1/2";
   }
 </script>
-
-<style>
-</style>
 
 <div class="flex flex-grow items-center justify-center">
 

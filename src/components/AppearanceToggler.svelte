@@ -2,9 +2,6 @@
   import { dark } from "../store";
 </script>
 
-<style>
-</style>
-
 <button
   type="button"
   class="flex items-center bg-gradient-to-br px-4 py-2 rounded shadow-sm
