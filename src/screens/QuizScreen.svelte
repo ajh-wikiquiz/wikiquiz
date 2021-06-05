@@ -2,11 +2,11 @@
   import QuestionCard from "../components/QuestionCard.svelte"
   import { dark } from "../store";  // dark mode
   import { createEventDispatcher } from "svelte";
-  import SwiperCore, { Navigation, Pagination } from 'swiper';
+  import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
   import { Swiper, SwiperSlide } from 'swiper/svelte';
   import 'swiper/swiper.scss';
 
-  SwiperCore.use([Navigation, Pagination]);
+  SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
   export let quizData = [];
 
@@ -51,7 +51,7 @@
 
   const interval = setInterval(() => {
     displayTime = getDisplayTime(getElapsedTimeInSeconds());
-  }, 500);
+  }, 250);
 </script>
 
 <div class="flex items-center justify-center">

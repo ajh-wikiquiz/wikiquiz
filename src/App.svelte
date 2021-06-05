@@ -9,6 +9,7 @@
   import QuestionCounter from "./components/QuestionCounter.svelte";
   import { dark, numQuestionsToGenerate, urlBarValue } from "./store";
 	import { fly } from 'svelte/transition';
+  import { v4 as uuidv4 } from 'uuid';
 
   export let title;
 
@@ -244,8 +245,8 @@
                   }
                 }
               }
-              return {'choice': choice.join(' '), 'isCorrect': false};
-            }))).concat([{'choice': important[i].text, 'isCorrect': true}]);
+              return {'choice': choice.join(' '), 'isCorrect': false, 'uuid': uuidv4()};
+            }))).concat([{'choice': important[i].text, 'isCorrect': true, 'uuid': uuidv4()}]);
         }
         blankedSentences = blankedSentences
           .filter((sentence) => sentence.choices.length > 0);

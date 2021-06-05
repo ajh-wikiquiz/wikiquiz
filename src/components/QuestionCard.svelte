@@ -7,7 +7,7 @@
   const dispatch = createEventDispatcher();
 
   const handleChoiceClick = (i, isCorrect) => {
-    let el = document.getElementById(`${choices[i].choice.split(' ').join('-')}-${i}`);
+    let el = document.getElementById(`${choices[i].choice.split(' ').join('-')}-${i}-${choices[i].uuid}`);
     if (isCorrect === true) {
       el.classList.remove('choice');
       el.classList.add('choice-correct');
@@ -28,7 +28,7 @@
   <div class="pt-6">
     {#each choices as choice, i}
       <button
-        id="{choice.choice.split(' ').join('-')}-{i}"
+        id="{choice.choice.split(' ').join('-')}-{i}-{choice.uuid}"
         class="choice"
         type="button"
         on:click|once={() => handleChoiceClick(i, choice.isCorrect)}

@@ -53,7 +53,8 @@ export default {
             }
         }),
         commonjs({
-          'swiper/svelte': ['Swiper', 'SwiperSlide']
+          'swiper/svelte': ['Swiper', 'SwiperSlide'],
+          'uuid': ['v4'],
         }),
 
         // If you have external dependencies installed from
