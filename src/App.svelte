@@ -13,6 +13,7 @@
   export let title;
 
   // Warm up the services to be used in this app.
+  console.log('Warming up services to be used.');
   fetch('https://ajh-wikiscraper.herokuapp.com');
   fetch('https://ajh-getimportant.herokuapp.com');
   fetch('https://ajh-getsimilar.herokuapp.com');
@@ -215,16 +216,31 @@
           blankedSentences[j].choices = (await Promise.all(blankedSentences[j].choices
             .map(async choice => {
               for (let k = 0; k < choice.length; k++) {
+                // choice[k] are the individual tokens or words within a choice.
                 if (
                   choice[k].includes('#') ||
                   choice[k].includes('[UNK]') ||
-                  important[i].text.includes(choice[k])
+                  important[i].text.toLowerCase().includes(choice[k].toLowerCase()) ||
+                  choice.indexOf(choice[k]) !== k  // check if is first occurence of this string in array
                 ) {
                   let similarWords = await tryFor(3, getSimilar, choice[k], 20)
                     .catch((error) => null);
                   if (similarWords !== null) {
-                    choice[k] = similarWords[
-                      Math.floor(Math.random() * similarWords.length)];
+                    for (let l = 0; l < 20; l++) {
+                      choice[k] = similarWords[
+                        Math.floor(Math.random() * similarWords.length)];
+                      if (
+                        choice[k].includes('#') ||
+                        choice[k].includes('[UNK]') ||
+                        important[i].text.toLowerCase().includes(choice[k].toLowerCase()) ||
+                        choice.indexOf(choice[k]) !== k  // Check if is first occurence of this string in array.
+                      ) {
+                        similarWords.splice(similarWords.indexOf(choice[k]));  // Remove from lotto so it doesn't get picked again.
+                      }
+                      else {
+                        break;
+                      }
+                    }
                   }
                 }
               }

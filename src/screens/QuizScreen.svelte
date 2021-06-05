@@ -2,8 +2,11 @@
   import QuestionCard from "../components/QuestionCard.svelte"
   import { dark } from "../store";  // dark mode
   import { createEventDispatcher } from "svelte";
+  import SwiperCore, { Navigation, Pagination } from 'swiper';
   import { Swiper, SwiperSlide } from 'swiper/svelte';
   import 'swiper/swiper.scss';
+
+  SwiperCore.use([Navigation, Pagination]);
 
   export let quizData = [];
 
@@ -83,7 +86,7 @@
 <Swiper
   spaceBetween={50}
   slidesPerView={1}
-  pagination={{ clickable: false }}
+  pagination={{ clickable: true }}
   scrollbar={{ draggable: true }}
 >
   {#each quizData as question}
