@@ -5,7 +5,8 @@
   #confettis {
     overflow: hidden;
     position: absolute;
-    height: 100%;
+    height: 85vh;
+    max-height: 85vh;
     width: 100%;
   }
 

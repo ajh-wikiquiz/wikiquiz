@@ -7,6 +7,12 @@
   export let articleImgSrc;
 </script>
 
+<style>
+  #articleImg {
+    max-height: 50vh;
+  }
+</style>
+
 <div class="flex items-center justify-center">
 
   <div class="flex flex-col flex-grow" class:text-white={$dark} class:text-black={!$dark}>

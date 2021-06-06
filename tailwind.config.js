@@ -40,6 +40,9 @@ module.exports = {
                 'focus:bg-white',
                 'w-full',
                 'w-1/2',
+                'hidden',
+                'md:inline-block',
+                '-left-1/3',
             ],
         }
     },

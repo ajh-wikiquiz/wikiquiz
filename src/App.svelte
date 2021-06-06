@@ -14,7 +14,7 @@
   export let title;
 
   // Warm up the services to be used in this app.
-  console.log('Warming up services to be used.');
+  console.log('Warming up services to be used. A few 404s may be seen on the console which is expected.');
   fetch('https://ajh-wikiscraper.herokuapp.com');
   fetch('https://ajh-getimportant.herokuapp.com');
   fetch('https://ajh-getsimilar.herokuapp.com');
@@ -29,10 +29,11 @@
   const transitionTime = 500;  // in milliseconds
 
   /// Refreshes the page.
-  function resetPage() {
+  async function resetPage() {
     loadingText = ['Error encountered, resetting.'];
     articleImgSrc = '';
     status = 1;
+    await new Promise(resolve => setTimeout(resolve, 2000));
     window.location.reload();
   }
 
@@ -51,7 +52,7 @@
       catch(err) {
         // Final try
         if (i === times-1 ) {
-          throw new Error(`All ${times} tries failed for ${fn.name}.`);
+          throw new Error(`All ${times} tries failed for ${fn.name}.\n${err}`);
         }
         await new Promise(resolve => setTimeout(resolve, timeout * 1000));
         timeout = timeout ** 2;  // Exponential retry time.
@@ -271,8 +272,8 @@
     status = 1;
 
     loadingText[0] = 'Fetching image...';
-    // Update loading screen image.
-    articleImgSrc = await tryFor(2, getArticleImgSrc, $urlBarValue).catch(
+    // Update loading screen image. TODO: Resample image.
+    articleImgSrc = await tryFor(1, getArticleImgSrc, $urlBarValue).catch(
       (error) => ''
     );
 
@@ -291,6 +292,43 @@
   const handleCompletedQuiz = async (event) => {
     status = 3;
   }
+
+  /// Returns an array of random wiki URLs.
+  async function wikigrabRandomUrls(fetchCount) {
+    return (await (await fetch(`https://wikigrab.herokuapp.com/get-random-articles?count=${fetchCount}`))
+      // Only use what's necessary from the response.
+      .json())['articles']
+      .map(article => article.url);
+  }
+
+  /// Returns an array of random wiki URLs from the official mediawiki API.
+  async function mediawikiRandomUrls(fetchCount) {
+    return Object.values(
+      (await (await fetch(`https://en.wikipedia.org/w/api.php?origin=*&action=query&generator=random&grnnamespace=0&grnlimit=${fetchCount}&prop=info&inprop=url&format=json`))
+      // Only use what's necessary from the response.
+      .json())['query']['pages']).map(page => page.fullurl);
+  }
+
+  const fetchCount = 15;
+  let randomUrlsCache;
+  let randomUrlsCacheIndex = 0;
+  const handleRandomUrl = async (event) => {
+    if (randomUrlsCacheIndex % fetchCount == 0) {
+      // Set to 1 immediately to avoid running multiple times while waiting.
+      randomUrlsCacheIndex = 1;
+      let urls = await tryFor(1, wikigrabRandomUrls, fetchCount)
+        .catch(async (error) => {
+          return await tryFor(1, mediawikiRandomUrls, fetchCount)
+            .catch((error) => null)  // TODO: Disable random url button here.
+        });
+      randomUrlsCache = urls;
+      $urlBarValue = randomUrlsCache[0];
+    }
+    else {
+      $urlBarValue = randomUrlsCache[randomUrlsCacheIndex];
+      randomUrlsCacheIndex++;
+    }
+  };
 </script>
 
 <!-- Note: "class:dark" is equivalent (and short for) "class:dark={dark}" or "class:dark={dark === true}" -->
@@ -308,11 +346,15 @@
     <!-- Top -->
     <div class="flex flex-row items-center justify-end p-3 pt-6 space-x-8">
       <!-- <AppearanceToggler /> -->
-      <QuestionCounter />
+      <QuestionCounter atStartScreen />
     </div>
 
     <!-- Content -->
-    <StartScreen title={title} on:urlSubmission={handleUrlSubmission} />
+    <StartScreen
+      title={title}
+      on:urlSubmission={handleUrlSubmission}
+      on:randomUrlRequest={handleRandomUrl}
+    />
 
   {:else if status === 1}
 
@@ -327,9 +369,9 @@
   {:else if status === 2}
 
     <!-- Top -->
-    <div class="flex flex-row items-center justify-between p-3 pt-6 space-x-8">
-      <UrlSearchBar isHalfWidth={false} on:urlSubmission={handleUrlSubmission} />
-      <GetRandomArticleButton />
+    <div class="flex flex-row items-center justify-between p-3 pt-6 space-x-2 sm:space-x-8">
+      <UrlSearchBar on:urlSubmission={handleUrlSubmission} />
+      <GetRandomArticleButton on:randomUrlRequest={handleRandomUrl} />
       <QuestionCounter />
       <!-- <AppearanceToggler /> -->
     </div>
@@ -343,9 +385,9 @@
 
   <div transition:fly="{{ y: 200, duration: transitionTime }}">
     <!-- Top -->
-    <div class="flex flex-row items-center justify-between p-3 pt-6 space-x-8">
-      <UrlSearchBar isHalfWidth={false} on:urlSubmission={handleUrlSubmission} />
-      <GetRandomArticleButton />
+    <div class="flex flex-row items-center justify-between p-3 pt-6 space-x-2 sm:space-x-8">
+      <UrlSearchBar on:urlSubmission={handleUrlSubmission} />
+      <GetRandomArticleButton on:randomUrlRequest={handleRandomUrl} />
       <QuestionCounter />
       <!-- <AppearanceToggler /> -->
     </div>

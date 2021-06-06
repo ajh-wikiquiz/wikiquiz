@@ -1,26 +1,15 @@
 <script>
-  import { urlBarValue, randomUrls, randomUrlsIndex } from "../store";
+  import { createEventDispatcher } from "svelte";
 
-  export let fetchCount = 10;  // Number of random urls to fetch at a time and cache.
+  const dispatch = createEventDispatcher();
 
   const handleRandomUrl = async () => {
-    if ($randomUrlsIndex % fetchCount == 0) {
-      // Set to 1 immediately to avoid running multiple times while waiting.
-      $randomUrlsIndex = 1;
-      let wikigrabPromise = await fetch(`https://wikigrab.herokuapp.com/get-random-articles?count=${fetchCount}`);
-      let wikigrabResponse = await wikigrabPromise.json();
-      $randomUrls = wikigrabResponse['articles'].map(i => i['url']);
-      $urlBarValue = $randomUrls[0];
-    }
-    else {
-      $urlBarValue = $randomUrls[$randomUrlsIndex];
-      $randomUrlsIndex++;
-    }
-  };
+    dispatch("randomUrlRequest");
+  }
 </script>
 
 <div>
-  <button on:click={() => handleRandomUrl()} type="button" class="btn btn-blue flex-shrink">
-    Random URL
+  <button on:click={() => handleRandomUrl()} type="button" class="btn btn-blue">
+    Random <span class="hidden sm:inline-block">URL</span>
   </button>
 </div>
