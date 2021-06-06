@@ -18,7 +18,12 @@
     <span class="text-left tooltip p-3 mt-1 lg:-mt-8 rounded-lg"
       class:text-gray-900={$dark} class:bg-gray-300={$dark}
       class:text-gray-300={!$dark} class:bg-gray-900={!$dark}>
-      Creates a quiz from the given wiki page.
+      Creates a quiz from the given wiki page. <br /><br />
+      <span class="text-sm">
+        Note: <br />
+        Uses functions hosted on free Heroku dynos. It may take a few seconds for them to wake up from sleep, resulting in a bit of a startup time for this app. <br />
+        By no means was this written negatively towards Heroku. In fact, I am extremely grateful for their generous free tier offering. 🙏
+      </span>
     </span>
   </span>
   <h1 class="inline bg-clip-text font-black text-5xl sm:text-6xl md:text-7xl leading-tight mt-5 select-none">
