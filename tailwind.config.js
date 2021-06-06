@@ -41,6 +41,7 @@ module.exports = {
                 'w-full',
                 'w-1/2',
                 'hidden',
+                'sm:inline-block',
                 'md:inline-block',
                 '-left-1/3',
             ],

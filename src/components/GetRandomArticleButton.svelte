@@ -1,6 +1,13 @@
 <script>
   import { createEventDispatcher } from "svelte";
 
+  export let atStartScreen = false;
+
+  let textClass = "";
+  if (!atStartScreen) {
+    textClass += " hidden sm:inline-block";
+  }
+
   const dispatch = createEventDispatcher();
 
   const handleRandomUrl = async () => {
@@ -10,6 +17,6 @@
 
 <div>
   <button on:click={() => handleRandomUrl()} type="button" class="btn btn-blue">
-    Random <span class="hidden sm:inline-block">URL</span>
+    Random <span class="{textClass}">URL</span>
   </button>
 </div>

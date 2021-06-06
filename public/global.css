@@ -6,7 +6,7 @@
 }
 
 .tooltip:hover {
-  @apply visible z-50;
+  @apply visible z-50 cursor-help;
 }
 
 .has-tooltip:hover .tooltip {

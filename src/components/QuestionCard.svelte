@@ -22,7 +22,7 @@
 
 <!-- Question -->
 <div class="pt-6 px-6 py-6 rounded shadow-lg">
-  <div>
+  <div class="select-none">
     {question} <br />
   </div>
   <div class="pt-6">

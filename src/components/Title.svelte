@@ -4,7 +4,7 @@
   export let title;
 </script>
 
-<span>
+<span class="select-none">
   <span class="has-tooltip">
     <sup>
       <button class="cursor-help"
@@ -21,7 +21,7 @@
       Creates a quiz from the given wiki page.
     </span>
   </span>
-  <h1 class="inline bg-clip-text font-black text-5xl sm:text-6xl md:text-7xl leading-tight mt-5">
+  <h1 class="inline bg-clip-text font-black text-5xl sm:text-6xl md:text-7xl leading-tight mt-5 select-none">
     {title}
   </h1>
 </span>

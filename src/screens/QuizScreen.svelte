@@ -59,7 +59,7 @@
   <div class="flex flex-grow" class:text-white={$dark} class:text-black={!$dark}>
 
     <div class="flex flex-row flex-grow mt-1 justify-between space-x-5">
-      <div>Time spent on quiz: {displayTime}</div>
+      <div class="select-none">Time spent on quiz: {displayTime}</div>
 
       <span class="has-tooltip">
         <button class="cursor-help"
@@ -76,7 +76,7 @@
         </span>
       </span>
 
-      <div>{numCorrect}/{quizData.length} correct</div>
+      <div class="select-none">{numCorrect}/{quizData.length} correct</div>
     </div>
 
   </div>

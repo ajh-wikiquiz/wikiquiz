@@ -110,7 +110,7 @@
   <div class="confetti"></div>
 </div>
 
-<div class="pt-8 bg-clip-text font-black text-xl sm:text-2xl md:text-3xl leading-tight">
+<div class="pt-8 bg-clip-text font-black text-xl sm:text-2xl md:text-3xl leading-tight select-none">
   Congratulations! <br />
   You completed the quiz for this article!
 </div>

@@ -19,7 +19,7 @@
 
     <Title title={title} />
 
-    <div class="flex flex-col flex-grow items-center justify-center mt-5 space-y-5">
+    <div class="flex flex-col flex-grow items-center justify-center mt-5 space-y-5 select-none">
       <div>
         {#each loadingText as text}
           {text} <br />

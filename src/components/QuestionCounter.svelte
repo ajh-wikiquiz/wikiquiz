@@ -20,7 +20,7 @@
 
 <div class="flex flex-row">
 
-  <span class="has-tooltip">
+  <span class="has-tooltip select-none">
     <button class="cursor-help"
       class:text-gray-600={$dark}
       class:text-gray-500={!$dark}>
@@ -36,7 +36,7 @@
     </span>
   </span>
 
-  <div class="flex flex-row space-x-2">
+  <div class="flex flex-row space-x-2 select-none">
     <span class="{labelClass}">Questions:&nbsp;</span>{$numQuestionsToGenerate}
     <button on:click={handleDecrement} type="button" class="btn-q-counter">
       -

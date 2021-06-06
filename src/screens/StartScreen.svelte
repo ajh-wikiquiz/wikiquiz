@@ -13,7 +13,7 @@
 
     <Title title={title} />
     <UrlSearchBar atStartScreen on:urlSubmission />
-    <GetRandomArticleButton on:randomUrlRequest />
+    <GetRandomArticleButton atStartScreen on:randomUrlRequest />
 
   </div>
 

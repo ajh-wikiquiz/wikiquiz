@@ -40,14 +40,16 @@
     <span class="text-left tooltip p-3 mt-1 lg:-mt-8 rounded-lg flex flex-col space-y-3 top-full md:top-10 lg:top-20 {urlTooltipPositioning}"
       class:text-gray-900={$dark} class:bg-gray-300={$dark}
       class:text-gray-300={!$dark} class:bg-gray-900={!$dark}>
-      <span class="flex">
+      <span class="flex select-none">
         Enter a wiki URL here and then press enter or click on the magnifying glass to the right!
       </span>
-      <span class="flex">
-        It should look something like this: <br />https://en.wikipedia.org/wiki/Help_Wanted_(SpongeBob_SquarePants)
+      <span class="flex flex-col">
+        <span class="select-none">It should look something like this: </span>
+        <span class="cursor-text">https://en.wikipedia.org/wiki/Help_Wanted_(SpongeBob_SquarePants)</span>
       </span>
-      <span class="flex">
-        Any mediawiki article URL can be the input (YMMV), even something like: <br />https://wiki.archlinux.org/title/Rust
+      <span class="flex flex-col">
+        <span class="select-none">Any mediawiki article URL can be the input (YMMV), even something like: </span>
+        <span class="cursor-text">https://wiki.archlinux.org/title/Rust</span>
       </span>
     </span>
 
