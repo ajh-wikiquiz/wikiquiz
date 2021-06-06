@@ -86,6 +86,7 @@
 <Swiper
   spaceBetween={50}
   slidesPerView={1}
+  noSwipingSelector={'button'}
   pagination={{ clickable: true }}
   scrollbar={{ draggable: true }}
 >
